@@ -1,5 +1,5 @@
 # Navigate to your project folder
-Set-Location "C:\Users\user\Desktop\nushik\project1>"
+Set-Location "C:\Users\user\Desktop\nushik\project1"
 
 # Add all changes
 git add .
