@@ -1,0 +1,12 @@
+.inputBox {
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 1920px) and (min-width: 1600px) {
+    gap: 30px;
+  }
+
+  @media (max-width: 1600px) and (min-width: 1080px) {
+    gap: 20px;
+  }
+}

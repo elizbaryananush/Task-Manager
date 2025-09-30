@@ -1,0 +1,11 @@
+.Text{
+    @media screen and (max-width: 1920px) and (min-width: 1600px) {
+        font-size: 30;
+        font-family: "Inter", sans-serif;
+    }
+
+    @media screen and (max-width: 1600px) and (min-width: 920px) {
+        font-size: 18;
+        font-family: "Inter", sans-serif;
+    }
+}

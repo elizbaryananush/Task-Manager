@@ -1,0 +1,12 @@
+.RegisterForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.RegisterFields{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 20px;
+}

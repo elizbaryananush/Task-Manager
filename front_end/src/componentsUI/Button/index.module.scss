@@ -1,0 +1,63 @@
+.Button {
+  width: 100%;
+  outline: none;
+  border: none;
+  cursor: pointer;
+
+  @media (max-width: 1920px) and (min-width: 1600px) {
+    border-radius: 20px;
+    height: 84px;
+    p {
+      font-size: 36px;
+    }
+  }
+
+  @media (max-width: 1600px) and (min-width: 1020px) {
+    border-radius: 12px;
+    height: 60px;
+    p {
+      font-size: 22px;
+    }
+  }
+}
+
+.primary {
+  background-color: var(--color-pink);
+  color: var(--color-white);
+
+  &:disabled {
+    background-color: var(--color-disabled-button);
+    color: var(--color-default);
+  }
+}
+
+.secondary {
+  border: #8a727a 1px solid;
+  color: #8a727a;
+  background-color: var(--color-white);
+}
+
+.buttonWithIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-white);
+  color: var(--color-default);
+  border: 1px solid var(--color-default);
+
+  @media (max-width: 1920px) and (min-width: 1600px) {
+    gap: 20px;
+    svg {
+      width: 43px;
+      height: 43px;
+    }
+  }
+
+  @media (max-width: 1600px) and (min-width: 1020px) {
+    gap: 12px;
+    svg {
+      width: 22px;
+      height: 22px;
+    }
+  }
+}

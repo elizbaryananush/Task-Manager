@@ -1,0 +1,154 @@
+/* SCSS HEX */
+$pink: #FF59B2;
+$lavander: rgb(224, 188, 236);
+$blue: #090059ff;
+$azure: #2d7dff;
+$red: #960000ff;
+$mint: rgb(205, 229, 194);
+$black: #00111fff;
+$white: #ffffffff;
+$gray: #47444dff;
+$lightgray: #b7b2afff;
+$red: #E33629;
+$default: #8a727a;
+$disabledButton: rgba(163, 123, 144, 0.21);
+
+//
+$azureactive: #0062ff;
+$azurehover: #3a86ff;
+
+//
+$whitehover: rgba(232, 232, 232, 0.574);
+$whiteactive: rgb(240, 240, 240);
+
+//
+$pinkactive: rgb(255, 95, 148);
+$pinkhover: rgb(255, 172, 200);
+
+//
+$lavanderactive: rgb(229, 151, 255);
+
+/* SCSS Gradient */
+$gradient-top: linear-gradient(
+  0deg,
+  #ff7da9ff,
+  #d3b6d3ff,
+  #090059ff,
+  #960000ff,
+  #7ca768ff
+);
+$gradient-right: linear-gradient(
+  90deg,
+  #ff7da9ff,
+  #d3b6d3ff,
+  #090059ff,
+  #960000ff,
+  #7ca768ff
+);
+$gradient-bottom: linear-gradient(
+  180deg,
+  #ff7da9ff,
+  #d3b6d3ff,
+  #090059ff,
+  #960000ff,
+  #7ca768ff
+);
+$gradient-left: linear-gradient(
+  270deg,
+  #ff7da9ff,
+  #d3b6d3ff,
+  #090059ff,
+  #960000ff,
+  #7ca768ff
+);
+$gradient-top-right: linear-gradient(
+  45deg,
+  #ff7da9ff,
+  #d3b6d3ff,
+  #090059ff,
+  #960000ff,
+  #7ca768ff
+);
+$gradient-bottom-right: linear-gradient(
+  135deg,
+  #ff7da9ff,
+  #d3b6d3ff,
+  #090059ff,
+  #960000ff,
+  #7ca768ff
+);
+$gradient-top-left: linear-gradient(
+  225deg,
+  #ff7da9ff,
+  #d3b6d3ff,
+  #090059ff,
+  #960000ff,
+  #7ca768ff
+);
+$gradient-bottom-left: linear-gradient(
+  315deg,
+  #ff7da9ff,
+  #d3b6d3ff,
+  #090059ff,
+  #960000ff,
+  #7ca768ff
+);
+$gradient-radial: radial-gradient(
+  #ff7da9ff,
+  #d3b6d3ff,
+  #090059ff,
+  #960000ff,
+  #7ca768ff
+);
+
+$gradient-linear: linear-gradient(
+  52deg,
+  rgba(255, 125, 169, 1) 0%,
+  rgba(255, 188, 236, 1) 25%,
+  rgba(45, 125, 255, 1) 50%,
+  rgba(94, 229, 153, 1) 75%,
+  rgba(237, 191, 83, 1) 100%
+);
+
+// Typography scale
+$text-xs: 12px;
+$text-sm: 14px;
+$text-md: 18px;
+$text-lg: 22px;
+$text-xl: 26px;
+
+//colors
+
+:root {
+  --color-pink: #{$pink};
+  --color-lavander: #{$lavander};
+  --color-lavanderactive: #{$lavanderactive};
+  --color-blue: #{$blue};
+  --color-azure: #{$azure};
+  --color-red: #{$red};
+  --color-mint: #{$mint};
+  --color-white: #{$white};
+  --color-whitehover: #{$whitehover};
+  --color-whiteactive: #{$whiteactive};
+  --color-black: #{$black};
+  --color-gray: #{$gray};
+  --color-lightgray: #{$lightgray};
+  --color-azureactive: #{$azureactive};
+  --color-azurehover: #{$azurehover};
+  --color-pinkhover: #{$pinkhover};
+  --color-pinkactive: #{$pinkactive};
+  --color-red: #{$red};
+  --color-default: #{$default};
+  --color-disabled-button: #{$disabledButton};
+  --gradient-radial: #{$gradient-radial};
+  --gradient-linear: #{$gradient-linear};
+}
+
+// Expose also as CSS variables for runtime usage
+:root {
+  --text-xs: #{$text-xs};
+  --text-sm: #{$text-sm};
+  --text-md: #{$text-md};
+  --text-lg: #{$text-lg};
+  --text-xl: #{$text-xl};
+}

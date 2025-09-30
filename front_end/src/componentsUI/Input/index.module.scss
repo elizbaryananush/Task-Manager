@@ -1,0 +1,86 @@
+.InputBox {
+  background: transparent;
+  height: fit-content;
+  border: 1px solid #8a727a;
+  position: relative;
+
+  input {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color: transparent !important;
+  }
+
+  .label {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 2;
+    font-family: 'Inter', sans-serif;
+    padding: 0 10px;
+    background-color: var(--color-white);
+    color: #8a727a;
+    transition: 0.2s;
+    
+    &::first-letter{
+      text-transform: capitalize;
+    }
+
+    &Active {
+      top: 0;
+      color: #ff59b2;
+    }
+
+    &Wrong {
+      color: var(--color-red) !important;
+    }
+  }
+
+  &Active {
+    border-color: var(--color-pink) !important;
+  }
+
+  &Wrong {
+    border-color: var(--color-red) !important;
+  }
+
+  @media (max-width: 1920px) and (min-width: 1600px) {
+    padding: 30px;
+    width: 600px;
+    border-radius: 20px;
+
+    .label {
+      left: 30px;
+    }
+
+    input {
+      font-size: 30px;
+    }
+  }
+
+  @media (max-width: 1600px) and (min-width: 1080px) {
+    padding: 18px 10px;
+    width: 400px;
+    border-radius: 12px;
+
+    .label {
+      left: 10px;
+    }
+
+    input {
+      font-size: 18px;
+    }
+  }
+}
+
+
+.errorText{
+  font-size: var(--text-xs) !important;
+  font-family: 'Inter' , sans-serif;
+  color: var(--color-red);
+  padding: 2px;
+  position: absolute;
+}
