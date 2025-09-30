@@ -1,57 +1,23 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit"
 
-interface RegisterState {
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  loading: boolean;
-  error: string | null;
+const initialState = {
+  step: 1,
+  userData: null,
 }
 
-const initialState: RegisterState = {
-  username: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
-  loading: false,
-  error: null,
-};
-
 const registerSlice = createSlice({
-  name: "register",
+  name: 'register',
   initialState,
   reducers: {
-    setUsername: (state, action: PayloadAction<string>) => {
-      state.username = action.payload;
+    setStep: (state, action) => {
+      state.step = action.payload
     },
-    setEmail: (state, action: PayloadAction<string>) => {
-      state.email = action.payload;
+    setUserData: (state, action) => {
+      state.userData = action.payload
     },
-    setPassword: (state, action: PayloadAction<string>) => {
-      state.password = action.payload;
-    },
-    setConfirmPassword: (state, action: PayloadAction<string>) => {
-      state.confirmPassword = action.payload;
-    },
-    setLoading: (state, action: PayloadAction<boolean>) => {
-      state.loading = action.payload;
-    },
-    setError: (state, action: PayloadAction<string | null>) => {
-      state.error = action.payload;
-    },
-    resetForm: () => initialState,
   },
-});
+})
 
-export const {
-  setUsername,
-  setEmail,
-  setPassword,
-  setConfirmPassword,
-  setLoading,
-  setError,
-  resetForm,
-} = registerSlice.actions;
+export const { setStep, setUserData } = registerSlice.actions
+export default registerSlice.reducer
 
-export default registerSlice.reducer;

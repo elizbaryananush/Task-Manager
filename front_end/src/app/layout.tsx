@@ -1,4 +1,5 @@
 import './globals.scss'
+import { StoreProvider } from '../store/provider'
 
 export default function RootLayout({
   children,
@@ -7,7 +8,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning>
+        <StoreProvider>{children}</StoreProvider>
+      </body>
     </html>
   )
 }
