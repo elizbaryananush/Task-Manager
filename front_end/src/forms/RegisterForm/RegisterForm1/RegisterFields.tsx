@@ -3,15 +3,21 @@ import Input from '../../../componentsUI/Input'
 import { useFormContext } from 'react-hook-form'
 import { TRegisterData1 } from '../../../types/componentsTypes/registerData.type'
 import styles from './index.module.scss'
+import { useFirstStepData } from '../../../features/register/hooks'
 
 interface IProp {
-    defaultValues : TRegisterData1
+  defaultValues: TRegisterData1
 }
 
-const RegisterFields:FC<IProp> = ({
-    defaultValues
-}) => {
-  const { register, setValue, watch, trigger, formState: { errors } } = useFormContext<TRegisterData1>();
+const RegisterFields: FC<IProp> = ({ defaultValues }) => {
+  const {
+    register,
+    setValue,
+    watch,
+    trigger,
+    formState: { errors },
+  } = useFormContext<TRegisterData1>()
+  const { setField } = useFirstStepData()
 
   return (
     <div className={styles.RegisterFields}>
@@ -22,9 +28,10 @@ const RegisterFields:FC<IProp> = ({
         error={errors.name?.message}
         ref={register('name').ref}
         value={watch('name')}
-        onChange={(e) => {
+        onChange={e => {
           setValue('name', String(e.target.value))
-          defaultValues.name =  String(e.target.value)
+          defaultValues.name = String(e.target.value)
+          setField('name' , e.target.value)
           trigger('name')
         }}
         {...register}
@@ -36,9 +43,9 @@ const RegisterFields:FC<IProp> = ({
         error={errors.username?.message}
         ref={register('username').ref}
         value={watch('username')}
-        onChange={(e) => {
+        onChange={e => {
           setValue('username', String(e.target.value))
-          defaultValues.username =  String(e.target.value)
+          defaultValues.username = String(e.target.value)
           trigger('username')
         }}
         {...register}
@@ -50,9 +57,9 @@ const RegisterFields:FC<IProp> = ({
         error={errors.password?.message}
         ref={register('password').ref}
         value={watch('password')}
-        onChange={(e) => {
+        onChange={e => {
           setValue('password', String(e.target.value))
-          defaultValues.password =  String(e.target.value)
+          defaultValues.password = String(e.target.value)
           trigger('password')
         }}
         {...register}

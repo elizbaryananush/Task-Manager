@@ -13,15 +13,16 @@ import Button from '../../../componentsUI/Button'
 import styles from './index.module.scss'
 import { useRouter } from 'next/navigation'
 import Text from '../../../componentsUI/Text'
-import { useRegisterData } from '../../../features/register/hooks'
+import { useFirstStepData, useRegisterData } from '../../../features/register/hooks'
+import { updateFirstStepField } from '../../../features/register/register.slice'
 
 const RegisterForm1 = () => {
   const router = useRouter()
+  const {...firstStep} = useFirstStepData()
   const form = useForm<TRegisterData1>({
     resolver: yupResolver(SignUpSchema1),
-    defaultValues: DefaultState1,
+    defaultValues: firstStep,
   })
-  const data = useRegisterData()
 
   const {
     formState: { isValid },
@@ -29,12 +30,9 @@ const RegisterForm1 = () => {
 
   const onSubmit = e => {
     e.preventDefault()
-    router.push('/signup/2')
+    // router.push('/signup/2')
+    console.log(firstStep);
   }
-
-  useEffect(() => {
-    console.log(data);
-  }, [])
 
   return (
     <FormProvider {...form}>

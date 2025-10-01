@@ -1,0 +1,1 @@
+export type statusType = 200 | 500 | null
