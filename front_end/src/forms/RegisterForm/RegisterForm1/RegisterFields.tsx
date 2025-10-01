@@ -30,8 +30,7 @@ const RegisterFields: FC<IProp> = ({ defaultValues }) => {
         value={watch('name')}
         onChange={e => {
           setValue('name', String(e.target.value))
-          defaultValues.name = String(e.target.value)
-          setField('name' , e.target.value)
+          setField('name', e.target.value)
           trigger('name')
         }}
         {...register}
@@ -45,7 +44,7 @@ const RegisterFields: FC<IProp> = ({ defaultValues }) => {
         value={watch('username')}
         onChange={e => {
           setValue('username', String(e.target.value))
-          defaultValues.username = String(e.target.value)
+          setField('username', e.target.value)
           trigger('username')
         }}
         {...register}
@@ -59,7 +58,7 @@ const RegisterFields: FC<IProp> = ({ defaultValues }) => {
         value={watch('password')}
         onChange={e => {
           setValue('password', String(e.target.value))
-          defaultValues.password = String(e.target.value)
+          setField('password', e.target.value)
           trigger('password')
         }}
         {...register}
