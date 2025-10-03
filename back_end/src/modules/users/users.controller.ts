@@ -6,11 +6,6 @@ import { User } from 'src/entities/user.entity';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Get()
-  getAll(): Promise<User[]> {
-    return this.usersService.findAll();
-  }
-
   @Post('register')
   create(@Body() user: Partial<User>): Promise<User> {
     return this.usersService.create(user);
