@@ -1,16 +1,20 @@
-import './globals.scss'
-import { StoreProvider } from '../store/provider'
+'use client'
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+import './globals.scss';
+import { StoreProvider } from '../store/provider';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactNode } from 'react';
+
+const queryClient = new QueryClient();
+
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body suppressHydrationWarning>
-        <StoreProvider>{children}</StoreProvider>
+        <QueryClientProvider client={queryClient}>
+          <StoreProvider>{children}</StoreProvider>
+        </QueryClientProvider>
       </body>
     </html>
-  )
+  );
 }

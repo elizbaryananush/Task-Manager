@@ -1,4 +1,4 @@
-import { useAppSelector, useAppDispatch} from '../../store/hooks'
+import { useAppSelector, useAppDispatch} from '../../hooks'
 import { updateFirstStepField } from './register.slice'
 
 export const useRegisterData = () => {
