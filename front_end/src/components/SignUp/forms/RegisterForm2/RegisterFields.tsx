@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
-import Input from '../../../componentsUI/Input'
+import Input from '../../../../componentsUI/Input'
 import { useFormContext } from 'react-hook-form'
-import { TRegisterData2 } from '../../../types/componentsTypes/registerData.type'
+import { TRegisterData2 } from '../../../../types/componentsTypes/registerData.type'
 import styles from './index.module.scss'
 
 interface IProp {

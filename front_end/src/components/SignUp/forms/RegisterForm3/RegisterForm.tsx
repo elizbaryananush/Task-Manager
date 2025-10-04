@@ -4,10 +4,10 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import {
   DefaultState1,
   TRegisterData1,
-} from '../../../types/componentsTypes/registerData.type'
-import { SignUpSchema1 } from '../../../types/schemas/signUp.schema'
+} from '../../../../types/componentsTypes/registerData.type'
+import { SignUpSchema1 } from '../../../../types/schemas/signUp.schema'
 import RegisterFields from './RegisterFields'
-import Button from '../../../componentsUI/Button'
+import Button from '../../../../componentsUI/Button'
 import styles from './index.module.scss'
 import { useRouter } from 'next/navigation'
 

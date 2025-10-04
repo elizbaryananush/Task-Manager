@@ -1,23 +1,20 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import {
   DefaultState1,
   TRegisterData1,
-} from '../../../types/componentsTypes/registerData.type'
-import { SignUpSchema1 } from '../../../types/schemas/signUp.schema'
+} from '../../../../types/componentsTypes/registerData.type'
+import { SignUpSchema1 } from '../../../../types/schemas/signUp.schema'
 import RegisterFields from './RegisterFields'
-import Button from '../../../componentsUI/Button'
+import Button from '../../../../componentsUI/Button'
 import styles from './index.module.scss'
-import { useRouter } from 'next/navigation'
-import Text from '../../../componentsUI/Text'
-import { useFirstStepData, useRegisterData } from '../../../features/register/hooks'
-import { updateFirstStepField } from '../../../features/register/register.slice'
+import Text from '../../../../componentsUI/Text'
+import { useFirstStepData } from '../../../../store/features/register/hooks'
 
 const RegisterForm1 = () => {
-  const router = useRouter()
   const {...firstStep} = useFirstStepData()
   const form = useForm<TRegisterData1>({
     resolver: yupResolver(SignUpSchema1),

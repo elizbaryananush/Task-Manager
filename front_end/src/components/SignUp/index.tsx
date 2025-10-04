@@ -1,11 +1,11 @@
 import { useParams } from 'next/navigation'
 import Text from '../../componentsUI/Text'
-import RegisterForm1 from '../../forms/RegisterForm/RegisterForm1/RegisterForm'
-import RegisterForm2 from '../../forms/RegisterForm/RegisterForm2/RegisterForm'
+import RegisterForm1 from './forms/RegisterForm1/RegisterForm'
+import RegisterForm2 from './forms/RegisterForm2/RegisterForm'
 import Logo from '../../public/assets/Logo.svg?inline'
 
 import styles from './index.module.scss'
-import RegisterForm3 from '../../forms/RegisterForm/RegisterForm3/RegisterForm'
+import RegisterForm3 from './forms/RegisterForm3/RegisterForm'
 import Button from '../../componentsUI/Button'
 import GoogleIcon from '../../public/assets/icons/google.svg'
 

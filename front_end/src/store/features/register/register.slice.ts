@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { registerInitialState } from '../../types/state/register/rootRegister.type'
-import { FirstStepState } from '../../types/state/register/registerFirstStep.type'
+import { registerInitialState } from '../../../types/state/register/rootRegister.type'
+import { FirstStepState } from '../../../types/state/register/registerFirstStep.type'
 
 const initialState:registerInitialState = {
   step: 2,
