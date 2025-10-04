@@ -14,15 +14,17 @@ import styles from './index.module.scss'
 import Text from '../../../../componentsUI/Text'
 import { useFirstStepData } from '../../../../store/features/register/hooks'
 import { useRegisterMutation } from '../../../../api/hooks/auth'
+import { useRouter } from 'next/navigation'
 
 const RegisterForm1 = () => {
+  const router = useRouter()
   const { ...firstStep } = useFirstStepData()
   const form = useForm<TRegisterData1>({
     resolver: yupResolver(SignUpSchema1),
     defaultValues: firstStep,
   })
 
-  const {mutate} = useRegisterMutation()
+  const { mutate } = useRegisterMutation()
 
   const {
     formState: { isValid },
@@ -30,7 +32,7 @@ const RegisterForm1 = () => {
 
   const onSubmit = e => {
     e.preventDefault()
-    // router.push('/signup/2')
+    router.push('/signup/2')
     console.log(firstStep)
 
     mutate(firstStep)

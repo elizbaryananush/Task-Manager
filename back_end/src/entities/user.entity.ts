@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToOne,
+  JoinColumn,
+} from 'typeorm';
+import { Email } from './email.entity';
 
 @Entity('users')
 export class User {
@@ -13,4 +20,10 @@ export class User {
 
   @Column()
   password: string;
+
+  @OneToOne(() => Email, Email => Email.user, {
+    cascade: true, 
+  })
+  @JoinColumn()
+  email: Email;
 }
