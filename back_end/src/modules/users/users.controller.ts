@@ -9,7 +9,6 @@ export class UsersController {
 
   @Post('register')
   create(@Body() user: UserDto): Promise<User> {
-    console.log('registering user');
     return this.usersService.register(user);
   }
 }
