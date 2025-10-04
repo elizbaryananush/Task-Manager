@@ -4,26 +4,21 @@ import { UserDto } from 'src/dto/user.dto';
 import { User } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
-
-    private jwtService: JwtService
   ) {}
 
-  async register(user: UserDto) {
+  async register(user: UserDto): Promise<User> {
     const salt = await bcrypt.genSalt();
     const password = user.password;
     const hash = await bcrypt.hash(password, salt);
 
-    
     const newUser = this.userRepository.create({...user, password: hash});
-    const token = this.jwtService.sign({ id: newUser.id });
-    // await this.userRepository.save(newUser);
-    return {newUser, token};
+    await this.userRepository.save(newUser);
+    return newUser;
   }
 }

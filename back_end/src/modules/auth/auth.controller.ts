@@ -3,13 +3,38 @@ import {
   Controller,
   Delete,
   Get,
+  InternalServerErrorException,
   Param,
   Patch,
   Post,
+  Res,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
+import { UserDto } from 'src/dto/user.dto';
+import { Response } from 'express';
+import { JwtService } from '@nestjs/jwt';
 
-@Controller('auths')
+@Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private jwtService: JwtService
+  ) {}
+
+  @Post('register')
+  async register(
+    @Body() user: UserDto,
+    @Res({ passthrough: true }) res: Response
+  ) {
+    try {
+      const newUser = await this.authService.registerUser(user);
+      const token = this.jwtService.sign({ id: newUser.id });
+
+      await this.authService.createCookie(res, token);
+      return 0;
+    } catch (err) {
+      return new InternalServerErrorException('Failed to create user');
+    }
+  }
 }
+

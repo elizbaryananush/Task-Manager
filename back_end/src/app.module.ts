@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { databaseConfig } from './config/database.config';
 import { UsersModule } from './modules/users/users.module';
 import { UsersRepository } from './repositories/users.repository';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { UsersRepository } from './repositories/users.repository';
       autoLoadEntities: true,
     }),
     UsersModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
