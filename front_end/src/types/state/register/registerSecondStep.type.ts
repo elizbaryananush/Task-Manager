@@ -1,7 +1,7 @@
 import { statusType } from "../../api/status.types"
 
 export interface SecondStepState{
-    email: ''
+    email: string
 }
 
 export interface SecondStep {

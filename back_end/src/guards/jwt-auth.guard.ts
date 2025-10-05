@@ -15,7 +15,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   canActivate(context: ExecutionContext) {
     const request = context.switchToHttp().getRequest();
 
-    const authHeader = request.headers.authorization;
+    const authHeader = request.cookies.authorization;
     if (!authHeader) throw new UnauthorizedException('Missing Authorization header');
 
     const token = authHeader.split(' ')[1];

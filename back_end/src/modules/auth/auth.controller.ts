@@ -20,6 +20,7 @@ import { EmailerService } from '../emailer/emailer.service';
 import { VeerificationCodeDto } from 'src/dto/verification-code.dto';
 import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
 import { UsersService } from '../users/users.service';
+import { User } from 'src/entities/user.entity';
 
 @Controller('auth')
 export class AuthController {
@@ -36,11 +37,11 @@ export class AuthController {
     @Res({ passthrough: true }) res: Response
   ) {
     try {
-      const newUser = await this.usersService.register(user);
+      const newUser = await this.usersService.register(user) as User;
       const token = this.jwtService.sign({ id: newUser.id });
 
       await this.authService.createCookie(res, token);
-      return 0;
+      return {"massage" : "registered successfully"};
     } catch (err) {
       return new InternalServerErrorException(
         `Failed to create user. With error ${err}`

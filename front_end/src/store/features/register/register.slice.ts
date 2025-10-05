@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { registerInitialState } from '../../../types/state/register/rootRegister.type'
 import { FirstStepState } from '../../../types/state/register/registerFirstStep.type'
+import { SecondStepState } from '../../../types/state/register/registerSecondStep.type'
 
-const initialState:registerInitialState = {
+const initialState: registerInitialState = {
   step: 2,
   userData: {
     firstStepData: {
@@ -46,10 +47,22 @@ const registerSlice = createSlice({
       action: PayloadAction<{ field: keyof FirstStepState; value: string }>
     ) => {
       state.userData.firstStepData.state[action.payload.field] =
-        action.payload.value;
+        action.payload.value
+    },
+    updateSecondStepField: (
+      state,
+      action: PayloadAction<{ field: keyof SecondStepState; value: string }>
+    ) => {
+      state.userData.secondStepData.state[action.payload.field] =
+        action.payload.value
     },
   },
 })
 
-export const { setStep, setUserData, updateFirstStepField } = registerSlice.actions
+export const {
+  setStep,
+  setUserData,
+  updateFirstStepField,
+  updateSecondStepField,
+} = registerSlice.actions
 export default registerSlice.reducer

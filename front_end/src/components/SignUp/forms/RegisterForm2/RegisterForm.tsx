@@ -10,13 +10,18 @@ import RegisterFields from './RegisterFields'
 import Button from '../../../../componentsUI/Button'
 import styles from './index.module.scss'
 import { useRouter } from 'next/navigation'
+import { useSendEmailMutation } from '../../../../api/hooks/auth'
+import { useSecondStepData } from '../../../../store/features/register/hooks'
 
 const RegisterForm2 = () => {
   const router = useRouter()
+    const { ...secondStep } = useSecondStepData()
+
   const form = useForm<TRegisterData2>({
     resolver: yupResolver(SignUpSchema2),
-    defaultValues: DefaultState2,
+    defaultValues: secondStep,
   })
+  const { mutate } = useSendEmailMutation()
 
   const {
     formState: { isValid },
@@ -24,6 +29,7 @@ const RegisterForm2 = () => {
 
   const onSubmit = e => {
     e.preventDefault()
+    mutate(secondStep)
     router.push('/signup/3')
   }
 

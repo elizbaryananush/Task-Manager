@@ -1,5 +1,5 @@
 import { useAppSelector, useAppDispatch} from '../../hooks'
-import { updateFirstStepField } from './register.slice'
+import { updateFirstStepField, updateSecondStepField } from './register.slice'
 
 export const useRegisterData = () => {
   return useAppSelector((state) => state.register)
@@ -22,4 +22,21 @@ export const useFirstStepData = () => {
   };
 };
 
+
+export const useSecondStepData = () => {
+  const dispatch = useAppDispatch();
+  const secondStep = useAppSelector(
+    (state) => state.register.userData.secondStepData.state
+  );
+
+  // wrapped setter function
+  const setField = (field: keyof typeof secondStep, value: string) => {
+    dispatch(updateSecondStepField({ field, value }));
+  };
+
+  return {
+    ...secondStep, // gives { name, username, password }
+    setField,     // function to update any field
+  };
+};
 export { useAppDispatch }
