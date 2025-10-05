@@ -10,7 +10,7 @@ export class Email {
   email: string;
 
   @Column({ nullable: true })
-  verificationCode: string;
+  verificationCode: number  ;
 
   @OneToOne(() => User, (user) => user.email)
   user: User;

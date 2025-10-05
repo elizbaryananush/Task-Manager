@@ -43,9 +43,7 @@ export class AuthController {
 
   @Post('sendEmail')
   async sendEmail(@Body() email: EmailDto) {
-    console.log('working');
-    
-    return this.emailerService.sendVerificationEmail(email);
+    return this.authService.verifyMail(email)
   }
 }
 
