@@ -12,6 +12,8 @@ export class Email {
   @Column({ nullable: true })
   verificationCode: number  ;
 
-  @OneToOne(() => User, (user) => user.email)
-  user: User;
+  @OneToOne(() => User, (user) => user.email , {
+    nullable: true
+  })
+  user?: User;
 }

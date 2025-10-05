@@ -1,4 +1,4 @@
-import { Injectable, Res } from '@nestjs/common';
+import { Injectable, Res, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Response } from 'express';
 import { User } from 'src/entities/user.entity';
@@ -10,11 +10,11 @@ import { EmailDto } from 'src/dto/email.dto';
 import { EmailRepository } from 'src/repositories/email.repository';
 import { UsersRepository } from 'src/repositories/users.repository';
 import { EmailerService } from '../emailer/emailer.service';
+import { VeerificationCodeDto } from 'src/dto/verification-code.dto';
 
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectRepository(User)
     private userRepository: UsersRepository,
     private emailRepository: EmailRepository,
 
@@ -30,17 +30,38 @@ export class AuthService {
     return newUser;
   }
 
-  async verifyMail(email: EmailDto) {
-    const newEmail = await this.emailRepository.create(email);
+  async sendMail(email: EmailDto, userId: string) {
+    const user = await this.userRepository.findOne({
+      where: { id: userId },
+      relations: ['email'],
+    });
+
+    if (!user) {
+      throw new UnauthorizedException('something went wrong')
+    }
+
+    const newEmail = this.emailRepository.create(email);
 
     const verificationCode =
       await this.emailerService.sendVerificationEmail(email);
 
     newEmail.verificationCode = verificationCode;
 
+    newEmail.user = user
+
     await this.emailRepository.save(newEmail);
 
-    return newEmail
+    const emailWithUser = await this.emailRepository.findOne({
+      where: { id: newEmail.id },
+      relations: ['user'],
+    });
+
+    return emailWithUser;
+  }
+
+  async verifyMail(verificationCode: VeerificationCodeDto, userId: string) {
+    if (verificationCode.verificationCode) {
+    }
   }
 
   async createCookie(@Res({ passthrough: true }) res: Response, token: string) {

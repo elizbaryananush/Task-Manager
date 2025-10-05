@@ -25,6 +25,6 @@ export class User {
     cascade: true, 
     nullable: true
   })
-  @JoinColumn({name: 'emailId'})
+  @JoinColumn()
   email?: Email;
 }
