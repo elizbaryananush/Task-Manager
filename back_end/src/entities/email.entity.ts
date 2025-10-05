@@ -16,4 +16,7 @@ export class Email {
     nullable: true
   })
   user?: User;
+
+  @Column({default : false})
+  isVerified: boolean;
 }

@@ -1,4 +1,9 @@
-import { Injectable, Res, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  Res,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Response } from 'express';
 import { User } from 'src/entities/user.entity';
@@ -30,24 +35,32 @@ export class AuthService {
     return newUser;
   }
 
-  async sendMail(email: EmailDto, userId: string) {
+  async sendMail(emailData: EmailDto, userId: string) {
+    const { email } = emailData;
     const user = await this.userRepository.findOne({
       where: { id: userId },
       relations: ['email'],
     });
 
     if (!user) {
-      throw new UnauthorizedException('something went wrong')
+      throw new UnauthorizedException('something went wrong');
     }
 
-    const newEmail = this.emailRepository.create(email);
+    const existedEmail = await this.emailRepository.findOne({
+      where: { email: email },
+    });
 
-    const verificationCode =
-      await this.emailerService.sendVerificationEmail(email);
+    if (existedEmail) {
+      throw new InternalServerErrorException('Email already in use');
+    }
+
+    const newEmail = this.emailRepository.create({ email, user: user });
+
+    const verificationCode = await this.emailerService.sendVerificationEmail({
+      email,
+    });
 
     newEmail.verificationCode = verificationCode;
-
-    newEmail.user = user
 
     await this.emailRepository.save(newEmail);
 
@@ -59,8 +72,19 @@ export class AuthService {
     return emailWithUser;
   }
 
-  async verifyMail(verificationCode: VeerificationCodeDto, userId: string) {
-    if (verificationCode.verificationCode) {
+  async verifyMail(verificationCodeData: VeerificationCodeDto, userId: string) {
+    const { verificationCode } = verificationCodeData;
+    const user = await this.userRepository.findOne({
+      where: { id: userId },
+      relations: ['email'],
+    });
+
+    if (!user) {
+      throw new UnauthorizedException('something went wrong');
+    }
+
+    if (user.email.verificationCode === verificationCode) {
+      user.email.isVerified = true;
     }
   }
 
