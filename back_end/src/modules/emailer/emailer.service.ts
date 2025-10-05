@@ -16,6 +16,8 @@ export class EmailerService {
       text: `Your verification code is: ${verificationCode}`,
       html: `<p>Your verification code is: <b>${verificationCode}</b></p>`,
     });
+
+    return verificationCode
   }
 }
 

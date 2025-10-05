@@ -23,7 +23,8 @@ export class User {
 
   @OneToOne(() => Email, Email => Email.user, {
     cascade: true, 
+    nullable: true
   })
-  @JoinColumn()
-  email: Email;
+  @JoinColumn({name: 'emailId'})
+  email?: Email;
 }

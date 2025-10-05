@@ -10,11 +10,11 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
     MailerModule.forRoot({
       transport: {
         host: 'smtp.gmail.com',
-        port: Number(process.env.SMTP_PORT) || 587,
+        port: 587,
         secure: false,
         auth: {
           user: 'elizbaryananush27@gmail.com',
-          pass: 'elizbar_yananush123A',
+          pass: 'mpxu owdw qzdq hvwa',
         },
       },
       defaults: {

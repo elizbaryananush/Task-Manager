@@ -37,12 +37,14 @@ export class AuthController {
       await this.authService.createCookie(res, token);
       return 0;
     } catch (err) {
-      return new InternalServerErrorException('Failed to create user');
+      return new InternalServerErrorException(`Failed to create user. With error ${err}`);
     }
   }
 
   @Post('sendEmail')
   async sendEmail(@Body() email: EmailDto) {
+    console.log('working');
+    
     return this.emailerService.sendVerificationEmail(email);
   }
 }

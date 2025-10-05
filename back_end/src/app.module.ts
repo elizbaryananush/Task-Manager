@@ -12,6 +12,7 @@ import { EmailerModule } from './modules/emailer/emailer.module';
     TypeOrmModule.forRoot({
       ...databaseConfig,
       autoLoadEntities: true,
+      synchronize: true
     }),
     UsersModule,
     AuthModule,

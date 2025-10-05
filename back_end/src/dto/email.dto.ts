@@ -3,7 +3,4 @@ import { IsEmail, IsNotEmpty, MinLength, IsBoolean, IsOptional, IsString } from 
 export class EmailDto {
   @IsEmail()
   email: string;
-
-  @IsString()
-  verificationCode: string;
 }
