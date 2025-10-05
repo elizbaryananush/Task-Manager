@@ -8,6 +8,7 @@ import {
   Patch,
   Post,
   Res,
+  UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UserDto } from 'src/dto/user.dto';
@@ -16,11 +17,15 @@ import { JwtService } from '@nestjs/jwt';
 import { EmailDto } from 'src/dto/email.dto';
 import { UserId } from 'src/decorators/get-user.decorator';
 import { EmailerService } from '../emailer/emailer.service';
+import { VeerificationCodeDto } from 'src/dto/verification-code.dto';
+import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
+import { UsersService } from '../users/users.service';
 
 @Controller('auth')
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
+    private readonly usersService: UsersService,
     private readonly emailerService: EmailerService,
     private jwtService: JwtService
   ) {}
@@ -31,7 +36,7 @@ export class AuthController {
     @Res({ passthrough: true }) res: Response
   ) {
     try {
-      const newUser = await this.authService.registerUser(user);
+      const newUser = await this.usersService.register(user);
       const token = this.jwtService.sign({ id: newUser.id });
 
       await this.authService.createCookie(res, token);
@@ -43,9 +48,19 @@ export class AuthController {
     }
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post('sendEmail')
   async sendEmail(@Body() email: EmailDto, @UserId() userId: string) {
     return this.authService.sendMail(email, userId);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('verifyEmail')
+  async verifyEmail(
+    @Body() verificationCode: VeerificationCodeDto,
+    @UserId() userId: string
+  ) {
+    return this.authService.verifyMail(verificationCode, userId);
   }
 }
 

@@ -13,11 +13,13 @@ export class UsersService {
   ) {}
 
   async register(user: UserDto): Promise<User> {
+    
     const salt = await bcrypt.genSalt();
     const password = user.password;
     const hash = await bcrypt.hash(password, salt);
-
-    const newUser = this.userRepository.create({...user, password: hash});
+    
+    const newUser = this.userRepository.create({...user, password: hash, email: null});
+    console.log('register', newUser.email.id);
     await this.userRepository.save(newUser);
     return newUser;
   }

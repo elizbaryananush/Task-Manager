@@ -83,8 +83,11 @@ export class AuthService {
       throw new UnauthorizedException('something went wrong');
     }
 
-    if (user.email.verificationCode === verificationCode) {
+    if (user.email.verificationCode == verificationCode) {
       user.email.isVerified = true;
+      return {"massage" : "your email is verified"}
+    }else{
+      return {"massage" : "verification failed"}
     }
   }
 
