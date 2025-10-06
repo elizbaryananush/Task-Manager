@@ -41,6 +41,8 @@ export class AuthService {
       where: { id: userId },
       relations: ['email'],
     });
+
+    
     
     if (!user) {
       throw new UnauthorizedException('something went wrong');
@@ -55,6 +57,7 @@ export class AuthService {
     }
     
     const newEmail = this.emailRepository.create({ email, user: user });
+    console.log({newEmail});
     
     const verificationCode = await this.emailerService.sendVerificationEmail({
       email,

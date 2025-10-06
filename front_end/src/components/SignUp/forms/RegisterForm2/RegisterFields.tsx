@@ -3,6 +3,7 @@ import Input from '../../../../componentsUI/Input'
 import { useFormContext } from 'react-hook-form'
 import { TRegisterData2 } from '../../../../types/componentsTypes/registerData.type'
 import styles from './index.module.scss'
+import { useSecondStepData } from '../../../../store/features/register/hooks'
 
 interface IProp {
     defaultValues : TRegisterData2
@@ -12,6 +13,7 @@ const RegisterFields:FC<IProp> = ({
     defaultValues
 }) => {
   const { register, setValue, watch, trigger, formState: { errors } } = useFormContext<TRegisterData2>();
+  const { setField, ...secondStep } = useSecondStepData()
 
   return (
     <div className={styles.RegisterFields}>
@@ -24,7 +26,9 @@ const RegisterFields:FC<IProp> = ({
         value={watch('email')}
         onChange={(e) => {
           setValue('email', String(e.target.value))
-          defaultValues.email =  String(e.target.value)
+          // defaultValues.email =  String(e.target.value)
+          setField('email', e.target.value)
+          console.log(secondStep);
           trigger('email')
         }}
         {...register}

@@ -33,8 +33,6 @@ const RegisterForm1 = () => {
   const onSubmit = e => {
     e.preventDefault()
     router.push('/signup/2')
-    console.log(firstStep)
-
     mutate(firstStep)
   }
 

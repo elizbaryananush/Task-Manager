@@ -16,8 +16,6 @@ export const UserId = createParamDecorator(
 
     // const jwtService = new JwtService({ secret: process.env.JWT_SECRET });
     // const decoded = jwtService.verify(token);
-    console.log(request.user);
-    
     return request.user?.id;
   },
 );
