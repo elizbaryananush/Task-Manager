@@ -7,10 +7,10 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   // app.use(express);
   app.enableCors({
-    origin: 'http://localhost:3000', // your frontend URL
-    credentials: true, // allow cookies to be sent
+    origin: 'http://localhost:3000',
+    credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: ['Content-Type', 'authorization'],
   });
   app.use(cookieParser());
   await app.listen(3001);

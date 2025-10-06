@@ -98,14 +98,15 @@ export class AuthService {
       24 * 60 * 60
     }; SameSite=Lax; Path=/;`;
 
-    const secure = process.env.NODE_ENV === 'production';
-    const finalCookie = secure ? cookie + ' Secure;' : cookie;
+    // const secure = process.env.NODE_ENV === 'production';
+    // const finalCookie = secure ? cookie + ' Secure;' : cookie;
 
     // set cookie
-    res.setHeader('Set-Cookie', finalCookie);
+    // res.setHeader('Set-Cookie', '');
 
-    // also set header so guard can read it
-    res.setHeader('Authorization', `Bearer ${token}`);
+    // // also set header so guard can read it
+    // res.setHeader('authorization', `Bearer ${token}`);
+    res.setHeader('authorization',`Bearer ${token}` )
   }
 }
 
