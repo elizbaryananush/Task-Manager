@@ -41,21 +41,21 @@ export class AuthService {
       where: { id: userId },
       relations: ['email'],
     });
-
+    
     if (!user) {
       throw new UnauthorizedException('something went wrong');
     }
-
+    
     const existedEmail = await this.emailRepository.findOne({
       where: { email: email },
     });
-
+    
     if (existedEmail) {
       throw new InternalServerErrorException('Email already in use');
     }
-
+    
     const newEmail = this.emailRepository.create({ email, user: user });
-
+    
     const verificationCode = await this.emailerService.sendVerificationEmail({
       email,
     });
@@ -96,17 +96,13 @@ export class AuthService {
 
     const cookie = `authorization=${token}; HttpOnly; Max-Age=${
       24 * 60 * 60
-    }; SameSite=Lax; Path=/;`;
-
-    // const secure = process.env.NODE_ENV === 'production';
-    // const finalCookie = secure ? cookie + ' Secure;' : cookie;
+    }; SameSite=Lax; Path=/; secure=false`;
 
     // set cookie
-    // res.setHeader('Set-Cookie', '');
+    res.setHeader('Set-Cookie', cookie);
 
-    // // also set header so guard can read it
-    // res.setHeader('authorization', `Bearer ${token}`);
-    res.setHeader('authorization', `Bearer ${token}`)
+    // also set header so guard can read it
+    res.setHeader('authorization', `Bearer ${token}`);
   }
 }
 

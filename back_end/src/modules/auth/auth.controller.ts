@@ -52,7 +52,12 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @Post('sendEmail')
   async sendEmail(@Body() email: EmailDto, @UserId() userId: string) {
-    return this.authService.sendMail(email, userId);
+    
+    try{
+     return this.authService.sendMail(email, userId);
+   }catch(err){
+    throw new InternalServerErrorException(`failed with error ${err}`)
+   }
   }
 
   @UseGuards(JwtAuthGuard)

@@ -1,18 +1,23 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { request } from 'http';
 
 export const UserId = createParamDecorator(
   (data: unknown, ctx: ExecutionContext) => {
     const request = ctx.switchToHttp().getRequest();
-    const token =
-      request.cookies?.access_token ||
-      request.headers.authorization?.split(' ')[1];
+    // const token =
+    //   request.cookies?.access_token ||
+    //   request.headers.authorization?.split(' ')[1];
 
-    if (!token) return null;
+    //   console.log(request.user);
+      
 
-    const jwtService = new JwtService({ secret: process.env.JWT_SECRET });
-    const decoded = jwtService.verify(token);
+    // if (!token) return null;
 
-    return decoded;
+    // const jwtService = new JwtService({ secret: process.env.JWT_SECRET });
+    // const decoded = jwtService.verify(token);
+    console.log(request.user);
+    
+    return request.user?.id;
   },
 );
