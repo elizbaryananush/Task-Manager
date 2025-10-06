@@ -7,15 +7,20 @@ function TimeoutButton() {
   const [seconds, setSeconds] = useState<number>(0)
 
   useEffect(() => {
-    while (minutes !== 0 && seconds !== 0) {
-      if (seconds == 0) {
-        setMinutes(minutes - 1)
-        setSeconds(59)
-      } else {
-        setSeconds(seconds - 1)
-      }
+    if (seconds == 0 && minutes > 0) {
+      setMinutes(minutes - 1)
+      setSeconds(59)
     }
   }, [])
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (seconds == 0 && minutes > 0) {
+        setMinutes(minutes - 1)
+      }
+      setSeconds(seconds - 1)
+    }, 1000)
+  } , [])
 
   return (
     <Text>
