@@ -106,7 +106,7 @@ export class AuthService {
 
     // // also set header so guard can read it
     // res.setHeader('authorization', `Bearer ${token}`);
-    res.setHeader('authorization',`Bearer ${token}` )
+    res.setHeader('authorization', `Bearer ${token}`)
   }
 }
 
