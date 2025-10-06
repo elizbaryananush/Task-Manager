@@ -15,11 +15,11 @@ import TimeoutButton from './components/timeoutButton'
 
 const RegisterForm3 = () => {
   const router = useRouter()
-  const [code , setCode] = useState<string>()
-
+  const [code, setCode] = useState<string>()
+  const [allowed, setAllowed] = useState<boolean>(false)
   useEffect(() => {
-console.log(code);
-  } , [code])
+    console.log(code)
+  }, [code])
 
   const onSubmit = e => {
     e.preventDefault()
@@ -27,9 +27,9 @@ console.log(code);
 
   return (
     <div className={styles.container}>
-      <OTPInput onChange={setCode}/>
-      <Text classname={styles.text}>Didn’t get the code? Resend in 0:59</Text>
-      <TimeoutButton />
+      <OTPInput onChange={setCode} />
+      <TimeoutButton setAllowed={setAllowed}/>
+      <Button disabled={!allowed}>Resend</Button>
     </div>
   )
 }
