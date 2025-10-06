@@ -6,10 +6,11 @@ import {
   TRegisterData1,
 } from '../../../../types/componentsTypes/registerData.type'
 import { SignUpSchema1 } from '../../../../types/schemas/signUp.schema'
-import RegisterFields from './RegisterFields'
 import Button from '../../../../componentsUI/Button'
 import styles from './index.module.scss'
 import { useRouter } from 'next/navigation'
+import OTPInput from '../../../../componentsUI/OTPNumberInput/otp-input'
+import Text from '../../../../componentsUI/Text'
 
 const RegisterForm3 = () => {
   const router = useRouter()
@@ -28,14 +29,11 @@ const RegisterForm3 = () => {
   }
 
   return (
-    <FormProvider {...form}>
-      <form className={styles.RegisterForm} onSubmit={e => onSubmit(e)}>
-        <RegisterFields defaultValues={DefaultState1} />
-        <Button disabled={!isValid} type="submit">
-          Sign Up
-        </Button>
-      </form>
-    </FormProvider>
+    <div className={styles.box}>
+      <OTPInput />
+      <Text>Didn’t get the code? Resend in 0:59</Text>
+      <Button disabled>Resend code</Button>
+    </div>
   )
 }
 

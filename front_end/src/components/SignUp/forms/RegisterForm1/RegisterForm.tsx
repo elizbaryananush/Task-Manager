@@ -15,6 +15,7 @@ import Text from '../../../../componentsUI/Text'
 import { useFirstStepData } from '../../../../store/features/register/hooks'
 import { useRegisterMutation } from '../../../../api/hooks/auth'
 import { useRouter } from 'next/navigation'
+import GoogleIcon from '../../../../public/assets/icons/google.svg'
 
 const RegisterForm1 = () => {
   const router = useRouter()
@@ -37,14 +38,24 @@ const RegisterForm1 = () => {
   }
 
   return (
-    <FormProvider {...form}>
-      <form className={styles.RegisterForm} onSubmit={e => onSubmit(e)}>
-        <RegisterFields defaultValues={DefaultState1} />
-        <Button disabled={!isValid} type="submit">
-          <Text>Register</Text>
-        </Button>
-      </form>
-    </FormProvider>
+    <>
+      <FormProvider {...form}>
+        <form className={styles.RegisterForm} onSubmit={e => onSubmit(e)}>
+          <RegisterFields defaultValues={DefaultState1} />
+          <Button disabled={!isValid} type="submit">
+            <Text>Register</Text>
+          </Button>
+        </form>
+      </FormProvider>
+
+      <Button icon>
+        <GoogleIcon />
+        <Text>Continue with Google</Text>
+      </Button>
+      <Text classname={styles.text}>
+        Already have an account ? <a href="/signin">Log in</a>
+      </Text>
+    </>
   )
 }
 
