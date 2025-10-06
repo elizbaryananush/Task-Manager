@@ -29,9 +29,9 @@ const RegisterForm3 = () => {
   }
 
   return (
-    <div className={styles.box}>
+    <div className={styles.container}>
       <OTPInput />
-      <Text>Didn’t get the code? Resend in 0:59</Text>
+      <Text classname={styles.text}>Didn’t get the code? Resend in 0:59</Text>
       <Button disabled>Resend code</Button>
     </div>
   )

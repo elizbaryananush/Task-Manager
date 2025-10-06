@@ -1,12 +1,13 @@
-.RegisterForm {
+.container{
     display: flex;
     flex-direction: column;
-    gap: 20px;
-}
+    gap: 30px;
 
-.RegisterFields{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    gap: 20px;
+    .text{
+        color: var(--color-default);
+    }
+
+    button{
+        font-size: 36px;
+    }
 }

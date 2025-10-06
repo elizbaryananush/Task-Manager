@@ -1,5 +1,7 @@
 import { Ref, useRef } from 'react';
 
+import styles from './styles.module.scss';
+
 type OTPInputProps = {
   length?: number;
   onChange?: (code: string) => void;
@@ -27,7 +29,7 @@ export default function OTPInput({ length = 6, onChange }: OTPInputProps) {
   };
 
   return (
-    <div className="flex gap-2">
+    <div className={styles.container}>
       {Array.from({ length }).map((_, i) => (
         <input
           key={i}
