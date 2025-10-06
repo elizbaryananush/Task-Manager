@@ -1,38 +1,43 @@
-import {
-  Injectable,
-  ExecutionContext,
-  UnauthorizedException,
-} from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
-import { JwtService } from '@nestjs/jwt';
+import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from "@nestjs/common";
+import { Reflector } from "@nestjs/core";
+import { JwtService } from "@nestjs/jwt";
+import { Request } from "express";
 
 @Injectable()
-export class JwtAuthGuard extends AuthGuard('jwt') {
-  constructor(private readonly jwtService: JwtService) {
-    super();
+export class JwtAuthGuard implements CanActivate {
+  constructor(private jwtService: JwtService, private reflector: Reflector) {}
+
+  async canActivate(context: ExecutionContext): Promise<boolean> {
+    const isPublic = this.reflector.getAllAndOverride<boolean>(true, [
+      context.getHandler(),
+      context.getClass(),
+    ]);
+    if (isPublic) {
+      // 💡 See this condition
+      return true;
+    }
+
+    const request = context.switchToHttp().getRequest();
+    const token = this.extractTokenFromHeader(request);
+    if (!token) {
+      throw new UnauthorizedException();
+    }
+    try {
+      const payload = await this.jwtService.verifyAsync(token, {
+        secret: "supersecretkey",
+      });
+      // 💡 We're assigning the payload to the request object here
+      // so that we can access it in our route handlers
+      request['user'] = payload;
+    } catch {
+      throw new UnauthorizedException();
+    }
+    return true;
   }
 
-  canActivate(context: ExecutionContext) {
-    const request = context.switchToHttp().getRequest();
-
-    const authHeader = request.cookies.authorization;
-    if (!authHeader) throw new UnauthorizedException('Missing Authorization header');
-
-    const token = authHeader.split(' ')[1];
-    if (!token) throw new UnauthorizedException('Invalid token format');
-
-    try {
-      const payload = this.jwtService.verify(token, {
-        secret: process.env.JWT_SECRET || 'supersecretkey',
-      });
-
-      request.user = {
-        id: payload.id,
-      };
-
-      return true;
-    } catch (err) {
-      throw new UnauthorizedException('Invalid or expired token');
-    }
+  private extractTokenFromHeader(request: Request): string | undefined {
+    const [type, token] = request.headers.authorization?.split(' ') ?? [];
+    return type === 'Bearer' ? token : undefined;
   }
 }
+

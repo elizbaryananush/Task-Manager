@@ -93,13 +93,19 @@ export class AuthService {
 
   async createCookie(@Res({ passthrough: true }) res: Response, token: string) {
     console.log('setting');
-    
-    res.cookie('authorization', token, {
-      httpOnly: true,
-      sameSite: 'lax',
-      maxAge: 24 * 60 * 60 * 1000,
-      secure: false, 
-    });
+
+    const cookie = `authorization=${token}; HttpOnly; Max-Age=${
+      24 * 60 * 60
+    }; SameSite=Lax; Path=/;`;
+
+    const secure = process.env.NODE_ENV === 'production';
+    const finalCookie = secure ? cookie + ' Secure;' : cookie;
+
+    // set cookie
+    res.setHeader('Set-Cookie', finalCookie);
+
+    // also set header so guard can read it
+    res.setHeader('Authorization', `Bearer ${token}`);
   }
 }
 
