@@ -6,8 +6,11 @@ import Text from '../Text'
 import styles from './index.module.scss'
 import clsx from 'clsx'
 
+import Eye from '../../public/icons/eye.svg'
+
 interface IProp {
-  type: 'text' | 'number' | 'email' | 'password'
+  type: 'text' | 'number' | 'email'
+  password?: boolean
   label: string
   id: string
   error?: string
@@ -17,8 +20,9 @@ interface IProp {
 const Input = forwardRef<
   HTMLInputElement,
   IProp & InputHTMLAttributes<HTMLInputElement>
->(({ type, label, id, value, error, onChange, ...rest }, ref) => {
+>(({ type, label, id, value, error, onChange, password = false, ...rest }, ref) => {
   const [focused, setFocused] = useState<boolean | undefined>(false)
+  const [isPasswordType, setIsPasswordType] = useState<boolean>(password)
 
   return (
     <div>
@@ -54,6 +58,7 @@ const Input = forwardRef<
           onChange={onChange}
           {...rest}
         />
+        {password && <Eye className={styles.svg}/>}
       </div>
       {error && <Text classname={styles.errorText}>{error}</Text>}
     </div>

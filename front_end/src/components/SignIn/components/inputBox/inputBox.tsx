@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import styles from './styles.module.scss'
 import Checkbox from '../checkbox/Checkbox'
 import Button from '../../../../componentsUI/Button'
-import Google from '../../../../public/assets/icons/google.svg'
+import Google from '../../../../public/icons/google.svg'
 const InputBox = () => {
   useEffect(() => {
 console.log(typeof Google);

@@ -15,7 +15,7 @@ import Text from '../../../../componentsUI/Text'
 import { useFirstStepData } from '../../../../store/features/register/hooks'
 import { useRegisterMutation } from '../../../../api/hooks/auth'
 import { useRouter } from 'next/navigation'
-import GoogleIcon from '../../../../public/assets/icons/google.svg'
+import GoogleIcon from '../../../../public/icons/google.svg'
 
 const RegisterForm1 = () => {
   const router = useRouter()

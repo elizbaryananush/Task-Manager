@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import Input from '../../../../componentsUI/Input'
 import { useFormContext } from 'react-hook-form'
 import { TRegisterData1 } from '../../../../types/componentsTypes/registerData.type'
@@ -51,6 +51,7 @@ const RegisterFields: FC<IProp> = ({ defaultValues }) => {
       />
       <Input
         type="text"
+        password
         id="password"
         label="password"
         error={errors.password?.message}
